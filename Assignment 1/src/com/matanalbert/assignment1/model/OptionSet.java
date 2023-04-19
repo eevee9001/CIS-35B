@@ -4,9 +4,10 @@ public class OptionSet {
     private String setName;
     private Option[] opt;
 
-    protected OptionSet() {}
-    protected OptionSet(String setName, int size) {
+    public OptionSet() {}
+    public OptionSet(String setName, int size) {
         this.setName = setName;
+        opt = new Option[size];
     }
 
     protected String getSetName() {
@@ -17,29 +18,69 @@ public class OptionSet {
         this.setName = setName;
     }
 
+    protected Option getOptElement(int x) {
+        return opt[x];
+    }
+
     protected Option[] getOpt() {
         return opt;
+    }
+
+    protected void setOptElement(Option opt, int x) {
+        this.opt[x] = opt;
     }
 
     protected void setOpt(Option[] opt) {
         this.opt = opt;
     }
 
-    protected Option getOptElement(int x) {
-        return opt[x];
-    }
-    protected void setOptElement(Option opt, int x) {
-        this.opt[x] = opt;
+    protected int getOptLength() {
+        return opt.length;
     }
 
+    protected void buildOption(int x, String name, float price) {
+        // ***** to be written *****
+    }
+
+    protected String getOptName(int x) {
+        return opt[x].getOptionName();
+    }
+
+    protected void setOptName(int x, String newOptName) {
+        this.opt[x].setOptionName(newOptName);
+    }
+
+    protected float getOptPrice(int x) {
+        return opt[x].getOptionPrice();
+    }
+
+    protected void setOptPrice(int x, float newOptPrice) {
+        this.opt[x].setOptionPrice(newOptPrice);
+    }
+
+    protected void printData() {
+        System.out.printf("Option Set name: %s\n", setName);
+        for (Option option : opt) {
+            option.printData();
+        }
+    }
+
+    protected void printOptElement(int x) {
+        System.out.printf("Option Set name: %s\n", setName);
+        opt[x].printData();
+    }
 
 
-    class Option {
+
+    static class Option {
          private String optionName;
          private float optionPrice;
 
-         protected Option(){}
-         protected Option(String optionName, float optionPrice) {}
+         public Option(){}
+         public Option(String optionName, float optionPrice) {
+             this.optionName = optionName;
+             this.optionPrice = optionPrice;
+         }
 
 
          protected String getOptionName() {
@@ -57,18 +98,25 @@ public class OptionSet {
          protected void setOptionPrice(float optionPrice) {
              this.optionPrice = optionPrice;
          }
-         void printData() {
-
+         protected void printData() {
+             System.out.printf("Option name: %s Option price: %f\n", optionName, optionPrice);
          }
 
-         @Override
-         public String toString() {
-             final StringBuilder sb = new StringBuilder("Option{");
-             sb.append("optionName='").append(optionName).append('\'');
-             sb.append(", optionPrice=").append(optionPrice);
-             sb.append('}');
-             return sb.toString();
-         }
-     }
+
+    }
+
+    public static void main(String[] args) {
+        Option option = new Option("foo", 1f);
+        option.printData();
+
+        Option[] options = new Option[]{new Option("foo", 1f), new Option("bar",2f)};
+        for (Option value : options) {
+            value.printData();
+
+        }
+
+        }
 
 }
+
+
