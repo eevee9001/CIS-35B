@@ -1,11 +1,15 @@
 package com.matanalbert.assignment2.exception;
 
 import java.io.*;
+import java.util.Scanner;
 
 
 public class AutoException extends Exception {
+    public static int INVALID_FILE = 1;
+
     private int errorNumber;
     private String errorMessage;
+    private final Scanner scanner = new Scanner(System.in);
 
     public AutoException() {
         super();
@@ -60,6 +64,11 @@ public class AutoException extends Exception {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String fix1() {
+        System.out.print("Please enter a valid file name: ");
+        return scanner.next();
     }
 /*
     public void fix(int errorNumber) {

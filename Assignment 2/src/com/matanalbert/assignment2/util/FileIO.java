@@ -1,9 +1,9 @@
 package com.matanalbert.assignment2.util;
 
+import com.matanalbert.assignment2.exception.AutoException;
 import com.matanalbert.assignment2.model.Automobile;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 public class FileIO {
 
@@ -12,7 +12,7 @@ public class FileIO {
      * @param fileName name of the file
      * @return the populated Automotive
      */
-    public Automobile buildAutoObject(String fileName) throws IOException {
+    public Automobile buildAutoObject(String fileName) throws AutoException {
         // try with resources
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String make = reader.readLine();
@@ -31,6 +31,8 @@ public class FileIO {
                 }
             }
             return automobile;
+        } catch (IOException e) {
+            throw new AutoException(AutoException.INVALID_FILE, "Could not read from file " + fileName);
         }
     }
 
@@ -56,5 +58,12 @@ public class FileIO {
         }
     }
 
+    private BufferedReader openFile(String fileName) throws AutoException {
+        try {
+            return new BufferedReader(new FileReader(fileName));
+        } catch (FileNotFoundException e) {
+            throw new AutoException(AutoException.INVALID_FILE, "File not found: " + fileName);
+        }
+    }
 
 }

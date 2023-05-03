@@ -1,5 +1,6 @@
 package com.matanalbert.assignment2.driver;
 
+import com.matanalbert.assignment2.exception.AutoException;
 import com.matanalbert.assignment2.model.Automobile;
 import com.matanalbert.assignment2.util.FileIO;
 
@@ -18,7 +19,7 @@ public class Driver1 {
             // populate a new automotive with data from .ser
             System.out.println("================================================================");
             newAutomobile.printData(); // print the new data
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | AutoException e) {
             e.printStackTrace();
         }
     }
