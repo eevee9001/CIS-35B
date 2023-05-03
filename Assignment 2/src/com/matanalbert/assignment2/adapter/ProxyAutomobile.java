@@ -3,12 +3,14 @@ package com.matanalbert.assignment2.adapter;
 import com.matanalbert.assignment2.exception.AutoException;
 import com.matanalbert.assignment2.model.*;
 import com.matanalbert.assignment2.util.FileIO;
+import com.matanalbert.assignment2.util.Logger;
 
 import java.io.IOException;
 
 public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
     private static Automobile proxyAuto;
     private final FileIO fileIO = new FileIO();
+    private final Logger logger = new Logger("log.txt");
 
     public void buildAuto(String fileName) {
         boolean problemFixed = false;
@@ -17,6 +19,7 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
                 proxyAuto = fileIO.buildAutoObject(fileName);
                 problemFixed = true;
             } catch (AutoException e) {
+                logger.logException(e);
                 fileName = e.fix1();
             }
         } while (!problemFixed);

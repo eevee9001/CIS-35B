@@ -12,15 +12,12 @@ public class AutoException extends Exception {
     private final Scanner scanner = new Scanner(System.in);
 
     public AutoException() {
-        super();
-        printMyException();
     }
 
     public AutoException(int errorNumber, String errorMessage) {
-        super();
+        super(String.format("%s (%d)", errorMessage, errorNumber));
         this.errorNumber = errorNumber;
         this.errorMessage = errorMessage;
-        printMyException();
     }
 
     public int getErrorNumber() {
@@ -38,6 +35,7 @@ public class AutoException extends Exception {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
+
 
     public void printMyException() {
         System.out.println("AutoException errorNumber = " + errorNumber + ", errorMessage =" + errorMessage);
