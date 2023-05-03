@@ -3,6 +3,7 @@ package com.matanalbert.assignment2.util;
 import com.matanalbert.assignment2.model.Automobile;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class FileIO {
 
@@ -54,4 +55,6 @@ public class FileIO {
             return (Automobile) input.readObject();
         }
     }
+
+
 }

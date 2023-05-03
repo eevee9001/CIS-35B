@@ -44,4 +44,6 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
             }
         }
     }
+
+
 }
