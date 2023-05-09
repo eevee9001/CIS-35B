@@ -5,12 +5,10 @@ import com.matanalbert.assignment2.model.*;
 import com.matanalbert.assignment2.util.FileIO;
 import com.matanalbert.assignment2.util.Logger;
 
-import java.io.IOException;
-
 public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
     private static Automobile proxyAuto;
-    private final FileIO fileIO = new FileIO();
     private final Logger logger = new Logger("log.txt");
+    private final FileIO fileIO = new FileIO(logger);
 
     public void buildAuto(String fileName) {
         boolean problemFixed = false;
@@ -29,7 +27,7 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
         if (proxyAuto.getModel().equals(modelName)) {
             proxyAuto.printData();
         } else {
-            System.out.println(modelName + "not found");
+            System.out.println(modelName + " not found");
         }
     }
 
@@ -54,6 +52,5 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
             }
         }
     }
-
 
 }

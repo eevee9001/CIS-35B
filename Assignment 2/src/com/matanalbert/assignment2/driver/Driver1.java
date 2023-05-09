@@ -3,14 +3,15 @@ package com.matanalbert.assignment2.driver;
 import com.matanalbert.assignment2.exception.AutoException;
 import com.matanalbert.assignment2.model.Automobile;
 import com.matanalbert.assignment2.util.FileIO;
+import com.matanalbert.assignment2.util.Logger;
 
 import java.io.IOException;
 
 public class Driver1 {
     public static void main(String[] args) {
-        FileIO f1 = new FileIO();
+        FileIO f1 = new FileIO(new Logger("log.txt"));
         try {
-            Automobile automobile = f1.buildAutoObject("Assignment 1/data/Car-1.txt");
+            Automobile automobile = f1.buildAutoObject("Assignment 1/data/ValidCar.txt");
             // Read file and populate automotive
             automobile.printData(); // Print data to system
             f1.writeData(automobile, "Assignment 1/data/Car-Serial1.ser");
