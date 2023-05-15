@@ -6,13 +6,13 @@ import com.matanalbert.assignment3.adapter.*;
 
 /**
  * Sample data files are in data directory :
- * ValidCar.txt: A complete automobile definition
+ * Car-1.txt: A complete automobile definition
  * IncompleteCar.txt: An example of an incomplete automobile that generates exceptions
  */
 public class Driver2A {
     public static void main(String[] args) throws IOException {
         if (args.length < 2) {
-            System.out.println("Usage: Driver2A ValidCar.txt IncompleteCar.txt");
+            System.out.println("Usage: Driver2A Car-1.txt IncompleteCar.txt");
             System.exit(1);
         }
         CreateAuto create = new BuildAuto();
