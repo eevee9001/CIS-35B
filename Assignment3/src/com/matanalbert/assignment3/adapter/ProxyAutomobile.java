@@ -6,7 +6,7 @@ import com.matanalbert.assignment3.util.FileIO;
 import com.matanalbert.assignment3.util.Logger;
 
 public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
-    private static Automobile proxyAuto;
+    private static LHMAuto<String, Automobile> proxyAutomobiles = new LHMAuto<>();
     private final Logger logger = new Logger("log.txt");
     private final FileIO fileIO = new FileIO(logger);
 
@@ -14,7 +14,9 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
         boolean problemFixed = false;
         do {
             try {
-                proxyAuto = fileIO.buildAutoObject(fileName);
+                Automobile proxyAuto = fileIO.buildAutoObject(fileName);
+                String key = proxyAuto.getMake() + " " + proxyAuto.getModel() + " " + proxyAuto.getYear();
+                proxyAutomobiles.create(key, proxyAuto);
                 problemFixed = true;
             } catch (AutoException e) {
                 logger.logException(e);
@@ -24,33 +26,43 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
     }
 
     public void printAuto(String modelName) {
-        if (proxyAuto.getModel().equals(modelName)) {
-            proxyAuto.printData();
-        } else {
-            System.out.println(modelName + " not found");
+        for (Automobile automobile : proxyAutomobiles.values()) {
+                if (automobile.getModel().equals(modelName)) {
+                    automobile.printData();
+                    return;
+                }
         }
+        System.out.println(modelName + " not found");
     }
 
     public void updateOptionSetName(String modelName, String optionSetName, String newName) {
-        if (proxyAuto.getModel().equals(modelName)) {
-            for (int i = 0; i < proxyAuto.getOpSet().size(); i++) {
-                if (proxyAuto.getOpSetName(i).equals(optionSetName)) {
-                    proxyAuto.setOpSetName(i, newName);
+        for (Automobile automobile : proxyAutomobiles.values()) {
+            if (automobile.getModel().equals(modelName)) {
+                for (int i = 0; i < automobile.getOpSet().size(); i++) {
+                    if (automobile.getOpSetName(i).equals(optionSetName)) {
+                        automobile.setOpSetName(i, newName);
+                    }
                 }
+                return;
             }
         }
+        System.out.println(modelName + " not found");
     }
 
     public void updateOptionPrice(String modelName, String optionSetName, String optionName, float newPrice) {
-        if (proxyAuto.getModel().equals(modelName)) {
-            for (int i = 0; i < proxyAuto.getOpSet().size(); i++) {
-                for (int j = 0; j < proxyAuto.getOptionLength(i); j++) {
-                    if (proxyAuto.getOpSetName(i).equals(optionSetName) && proxyAuto.getOptName(i, j).equals(optionName)) {
-                        proxyAuto.setOptPrice(i, j, newPrice);
+        for (Automobile automobile : proxyAutomobiles.values()) {
+            if (automobile.getModel().equals(modelName)) {
+                for (int i = 0; i < automobile.getOpSet().size(); i++) {
+                    for (int j = 0; j < automobile.getOptionLength(i); j++) {
+                        if (automobile.getOpSetName(i).equals(optionSetName) &&
+                                automobile.getOptName(i, j).equals(optionName)) {
+                            automobile.setOptPrice(i, j, newPrice);
+                        }
                     }
                 }
+                return;
             }
         }
+        System.out.println(modelName + " not found");
     }
-
 }
