@@ -1,8 +1,12 @@
 package com.matanalbert.assignment3.model;
 
+import com.matanalbert.assignment3.adapter.ChoiceAuto;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Automobile implements Serializable {
     private String make;
@@ -10,8 +14,7 @@ public class Automobile implements Serializable {
     private int year;
     private float basePrice;
     private List<OptionSet> opSet = new ArrayList<>();
-    private List<Option> choice = new ArrayList<>();
-    private static LHMAuto<String, String> LHMAuto = new LHMAuto<String, String>();
+    private Map<String,  Option> choice = new HashMap<>();
 
     public Automobile() {
     }
@@ -247,5 +250,40 @@ public class Automobile implements Serializable {
                 }
             }
         }
+    }
+
+    public String getOptionChoice(String setName) {
+        for (OptionSet optionSet : opSet) {
+            if (optionSet.getSetName().equals(setName)) {
+                return optionSet.getOptionChoice().getName();
+            }
+        }
+        return null;
+    }
+
+    public float getOptionChoicePrice(String setName) {
+        for (OptionSet optionSet : opSet) {
+            if (optionSet.getSetName().equals(setName)) {
+                return optionSet.getOptionChoice().getPrice();
+            }
+        }
+        return 0;
+    }
+
+    public void setOptionChoice(String setName, String optionName) {
+        for (OptionSet optionSet : opSet) {
+            if (optionSet.getSetName().equals(setName)) {
+                optionSet.setOptionChoice(optionName);
+            }
+        }
+    }
+
+    public float getTotalPrice() {
+        float price = basePrice;
+        for (OptionSet optionSet : opSet) {
+            price += optionSet.getOptionChoice().getPrice();
+        }
+
+        return price;
     }
 }

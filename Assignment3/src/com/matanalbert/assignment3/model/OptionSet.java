@@ -7,6 +7,7 @@ import java.util.List;
 public class OptionSet implements Serializable {
     private String setName;
     private List<Option> opt = new ArrayList<>();
+    private Option choice = null;
 
     OptionSet(String setName, int size) {
         this.setName = setName;
@@ -82,6 +83,18 @@ public class OptionSet implements Serializable {
         opt.add(new Option(name, price));
     }
 
+    protected Option getOptionChoice() {
+        return choice;
+    }
+
+    protected void setOptionChoice(String optionName) {
+        for (Option option : opt) {
+            if (option.getName().equals(optionName)) {
+                choice = option;
+                return;
+            }
+        }
+    }
 }
 
 
