@@ -1,14 +1,7 @@
-2023-05-09T00:47:25.709Z
-com.matanalbert.assignment2.exception.AutoException: Missing 'basePrice' (3)
-	at com.matanalbert.assignment2.util.FileIO.readFloatValue(FileIO.java:126)
-	at com.matanalbert.assignment2.util.FileIO.safeReadFloatValue(FileIO.java:115)
-	at com.matanalbert.assignment2.util.FileIO.buildAutoObject(FileIO.java:28)
-	at com.matanalbert.assignment2.adapter.ProxyAutomobile.buildAuto(ProxyAutomobile.java:17)
-	at com.matanalbert.assignment2.driver.Driver2A.main(Driver2A.java:31)
-2023-05-09T00:47:31.883Z
-com.matanalbert.assignment2.exception.AutoException: Missing 'numOptionSets' (4)
-	at com.matanalbert.assignment2.util.FileIO.readIntValue(FileIO.java:147)
-	at com.matanalbert.assignment2.util.FileIO.safeReadIntValue(FileIO.java:132)
-	at com.matanalbert.assignment2.util.FileIO.buildAutoObject(FileIO.java:29)
-	at com.matanalbert.assignment2.adapter.ProxyAutomobile.buildAuto(ProxyAutomobile.java:17)
-	at com.matanalbert.assignment2.driver.Driver2A.main(Driver2A.java:31)
+2023-05-11T03:08:12.046Z
+com.matanalbert.assignment3.exception.AutoException: Missing 'numOptionSets' (4)
+	at com.matanalbert.assignment3.util.FileIO.readIntValue(FileIO.java:148)
+	at com.matanalbert.assignment3.util.FileIO.safeReadIntValue(FileIO.java:133)
+	at com.matanalbert.assignment3.util.FileIO.buildAutoObject(FileIO.java:30)
+	at com.matanalbert.assignment3.adapter.ProxyAutomobile.buildAuto(ProxyAutomobile.java:17)
+	at com.matanalbert.assignment3.driver.Driver2A.main(Driver2A.java:22)

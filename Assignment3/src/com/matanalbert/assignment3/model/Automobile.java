@@ -1,20 +1,24 @@
 package com.matanalbert.assignment3.model;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 public class Automobile implements Serializable {
     private String make;
     private String model;
+    private int year;
     private float basePrice;
     private OptionSet[] opSet;
+    private ArrayList<Option> choice;
+    private static LHMAuto<String, String> LHMAuto = new LHMAuto<String, String>();
 
     public Automobile() {
     }
 
-    public Automobile(String make, String model, float basePrice, int numOptionSets) {
+    public Automobile(String make, String model, int year, float basePrice, int numOptionSets) {
         this.make = make;
         this.model = model;
+        this.year = year;
         this.basePrice = basePrice;
         this.opSet = new OptionSet[numOptionSets];
     }
@@ -33,6 +37,14 @@ public class Automobile implements Serializable {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public float getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public float getBasePrice() {
@@ -119,6 +131,10 @@ public class Automobile implements Serializable {
         System.out.printf("Model:  %s \n", model);
     }
 
+    public void printYear() {
+        System.out.printf("Year:  %s \n", year);
+    }
+
     public void printBasePrice() {
         System.out.printf("Base price:  %.2f\n", basePrice);
     }
@@ -144,6 +160,7 @@ public class Automobile implements Serializable {
 
     public void printData() {
         printMakeModel();
+        printYear();
         printBasePrice();
         printOpSet();
     }

@@ -25,9 +25,10 @@ public class FileIO {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String make = safeReadStringValue(reader, "Make");
             String model = safeReadStringValue(reader, "Model");
+            int year = safeReadIntValue(reader, "Year");
             float basePrice = safeReadFloatValue(reader, "basePrice");
             int numOptionSets = safeReadIntValue(reader, "numOptionSets");
-            Automobile automobile = new Automobile(make, model, basePrice, numOptionSets);
+            Automobile automobile = new Automobile(make, model, year, basePrice, numOptionSets);
             for (int optionSetIndex = 0; optionSetIndex < numOptionSets; optionSetIndex++) {
                 String setName = safeReadStringValue(reader, "setName");
                 int setSize = safeReadIntValue(reader, "setSize");
