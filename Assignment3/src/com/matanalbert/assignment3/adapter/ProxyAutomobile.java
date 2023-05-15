@@ -33,7 +33,7 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
 
     public void updateOptionSetName(String modelName, String optionSetName, String newName) {
         if (proxyAuto.getModel().equals(modelName)) {
-            for (int i = 0; i < proxyAuto.getOpSet().length; i++) {
+            for (int i = 0; i < proxyAuto.getOpSet().size(); i++) {
                 if (proxyAuto.getOpSetName(i).equals(optionSetName)) {
                     proxyAuto.setOpSetName(i, newName);
                 }
@@ -43,7 +43,7 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto {
 
     public void updateOptionPrice(String modelName, String optionSetName, String optionName, float newPrice) {
         if (proxyAuto.getModel().equals(modelName)) {
-            for (int i = 0; i < proxyAuto.getOpSet().length; i++) {
+            for (int i = 0; i < proxyAuto.getOpSet().size(); i++) {
                 for (int j = 0; j < proxyAuto.getOptionLength(i); j++) {
                     if (proxyAuto.getOpSetName(i).equals(optionSetName) && proxyAuto.getOptName(i, j).equals(optionName)) {
                         proxyAuto.setOptPrice(i, j, newPrice);

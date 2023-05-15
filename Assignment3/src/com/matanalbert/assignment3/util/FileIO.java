@@ -28,15 +28,15 @@ public class FileIO {
             int year = safeReadIntValue(reader, "Year");
             float basePrice = safeReadFloatValue(reader, "basePrice");
             int numOptionSets = safeReadIntValue(reader, "numOptionSets");
-            Automobile automobile = new Automobile(make, model, year, basePrice, numOptionSets);
+            Automobile automobile = new Automobile(make, model, year, basePrice);
             for (int optionSetIndex = 0; optionSetIndex < numOptionSets; optionSetIndex++) {
                 String setName = safeReadStringValue(reader, "setName");
                 int setSize = safeReadIntValue(reader, "setSize");
-                automobile.setOneOpSet(optionSetIndex, setName, setSize);
+                automobile.addOneOpSet(setName, setSize);
                 for (int optionIndex = 0; optionIndex < setSize; optionIndex++) {
                     String optionName = safeReadStringValue(reader, "optionName");
                     float optionPrice = safeReadFloatValue(reader, "optionPrice");
-                    automobile.setOneOpSetOpt(optionSetIndex, optionIndex, optionName, optionPrice);
+                    automobile.addOneOpSetOpt(optionSetIndex, optionName, optionPrice);
                 }
             }
             return automobile;

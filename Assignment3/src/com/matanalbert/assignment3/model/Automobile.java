@@ -2,25 +2,25 @@ package com.matanalbert.assignment3.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Automobile implements Serializable {
     private String make;
     private String model;
     private int year;
     private float basePrice;
-    private OptionSet[] opSet;
-    private ArrayList<Option> choice;
+    private List<OptionSet> opSet = new ArrayList<>();
+    private List<Option> choice = new ArrayList<>();
     private static LHMAuto<String, String> LHMAuto = new LHMAuto<String, String>();
 
     public Automobile() {
     }
 
-    public Automobile(String make, String model, int year, float basePrice, int numOptionSets) {
+    public Automobile(String make, String model, int year, float basePrice) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.basePrice = basePrice;
-        this.opSet = new OptionSet[numOptionSets];
     }
 
     public String getMake() {
@@ -61,66 +61,63 @@ public class Automobile implements Serializable {
      * @return the chosen Option Set
      */
     public OptionSet getOneOpSet(int optionSetIndex) {
-        return opSet[optionSetIndex];
+        return opSet.get(optionSetIndex);
     }
 
     /**
      * Constructs a single Option Set at a given index
-     * @param optionSetIndex index of Option Set to set
      * @param setName new name for the option set
-     * @param setSize size of the option set
      */
-    public void setOneOpSet(int optionSetIndex, String setName, int setSize) {
-        this.opSet[optionSetIndex] = new OptionSet(setName, setSize);
+    public void addOneOpSet(String setName, int setSize) {
+        this.opSet.add(new OptionSet(setName, setSize));
     }
 
-    public OptionSet[] getOpSet() {
+    public List<OptionSet> getOpSet() {
         return opSet;
     }
 
-    public void setOpSet(OptionSet[] opSet) { this.opSet = opSet; }
+    public void setOpSet(List<OptionSet> opSet) { this.opSet = opSet; }
 
     public int getOpSetLength() {
-        return opSet.length;
+        return opSet.size();
     }
 
     public int getOptionLength(int optionSetIndex) {
-        return opSet[optionSetIndex].getOptLength();
+        return opSet.get(optionSetIndex).getOptLength();
     }
 
     public String getOpSetName(int optionSetIndex) {
-        return opSet[optionSetIndex].getSetName();
+        return opSet.get(optionSetIndex).getSetName();
     }
 
     public void setOpSetName(int optionSetIndex, String setName) {
-        this.opSet[optionSetIndex].setSetName(setName);
+        this.opSet.get(optionSetIndex).setSetName(setName);
     }
 
     public String getOptName(int optionSetIndex, int optionIndex) {
-        return opSet[optionSetIndex].getOptName(optionIndex);
+        return opSet.get(optionSetIndex).getOptName(optionIndex);
     }
 
     public void setOptName(int optionSetIndex, int optionIndex, String optName) {
-        this.opSet[optionSetIndex].setOptName(optionIndex, optName);
+        this.opSet.get(optionSetIndex).setOptName(optionIndex, optName);
     }
 
     public float getOptPrice(int optionSetIndex, int optionIndex) {
-        return opSet[optionSetIndex].getOptPrice(optionIndex);
+        return opSet.get(optionSetIndex).getOptPrice(optionIndex);
     }
 
     public void setOptPrice(int optionSetIndex, int optionIndex, float optPrice) {
-        this.opSet[optionSetIndex].setOptPrice(optionIndex, optPrice);
+        this.opSet.get(optionSetIndex).setOptPrice(optionIndex, optPrice);
     }
 
     /**
      * Calls an OptionSet method to construct a single Option at a given index
      * @param optionSetIndex index of Option Set to set
-     * @param optionIndex index of Option to set
      * @param name Option name
      * @param price Option price
      */
-    public void setOneOpSetOpt(int optionSetIndex, int optionIndex, String name, float price) {
-        this.opSet[optionSetIndex].buildOption(optionIndex, name, price);
+    public void addOneOpSetOpt(int optionSetIndex, String name, float price) {
+        this.opSet.get(optionSetIndex).addOption(name, price);
     }
 
     public void printMake() {
@@ -151,11 +148,11 @@ public class Automobile implements Serializable {
     }
 
     public void printOneOpSet(int optionSetIndex) {
-        this.opSet[optionSetIndex].printData();
+        this.opSet.get(optionSetIndex).printData();
     }
 
     public void printOneOpt(int optionSetIndex, int optionIndex) {
-        this.opSet[optionSetIndex].printOneOption(optionIndex);
+        this.opSet.get(optionSetIndex).printOneOption(optionIndex);
     }
 
     public void printData() {
@@ -171,9 +168,9 @@ public class Automobile implements Serializable {
      * @param newSetName new set name
      */
     public void updateOpSetName(String str, String newSetName) {
-        for (int i = 0; i < opSet.length; i++) {
+        for (int i = 0; i < opSet.size(); i++) {
             if (i == str.indexOf(str)) {
-                opSet[i].setSetName(newSetName);
+                opSet.get(i).setSetName(newSetName);
             }
         }
     }
@@ -184,9 +181,9 @@ public class Automobile implements Serializable {
      * @param newOptName new option name
      */
     public void updateOptName(String str, String newOptName) {
-        for (int i = 0; i < opSet.length; i++) {
+        for (int i = 0; i < opSet.size(); i++) {
             if (i == str.indexOf(str)) {
-                opSet[i].setOptName(i, newOptName);
+                opSet.get(i).setOptName(i, newOptName);
             }
         }
     }
@@ -196,19 +193,19 @@ public class Automobile implements Serializable {
      * @param newOptPrice new option price
      */
     public void updateOptPrice(String str, float newOptPrice) {
-        for (int i = 0; i < opSet.length; i++) {
+        for (int i = 0; i < opSet.size(); i++) {
             if (i == str.indexOf(str)) {
-                opSet[i].setOptPrice(i, newOptPrice);
+                opSet.get(i).setOptPrice(i, newOptPrice);
             }
         }
     }
 
     /**
-     * Deletes an OptionSet and sets it to null
-     * @param optionSetIndex index of option set to replace with null
+     * Deletes an OptionSet
+     * @param optionSetIndex index of option set to delete
      */
     public void deleteOpSet(int optionSetIndex) {
-        opSet[optionSetIndex] = null;
+        opSet.remove(optionSetIndex);
     }
 
     /**
@@ -216,13 +213,13 @@ public class Automobile implements Serializable {
      * @param str name of Option Set
      */
     public void deleteOpSet(String str) {
-        for (int i = 0; i < opSet.length; i++) {
-            OptionSet optionSet = opSet[i];
+        for (int i = 0; i < opSet.size(); i++) {
+            OptionSet optionSet = opSet.get(i);
             if (optionSet == null) {
                 return;
             }
             if (optionSet.getSetName().equals(str)) {
-                opSet[i] = null;
+                opSet.remove(i);
                 return;
             }
         }
@@ -233,18 +230,18 @@ public class Automobile implements Serializable {
      * @param optionSetIndex index of option to replace with null
      */
     public void deleteOpt(int optionSetIndex, int optionIndex) {
-        opSet[optionSetIndex].setOneOption(null, optionIndex);
+        opSet.get(optionSetIndex).setOneOption(null, optionIndex);
     }
 
     /**
-     * Searches for an Option  by name and sets it to null
+     * Searches for an Option by name and sets it to null
      * @param str name of Option
      */
     public void deleteOpt(String str) {
-        for (int i = 0; i < opSet.length; i++) {
-            for (int j = 0; j < opSet[j].getOptLength(); j++) {
+        for (int i = 0; i < opSet.size(); i++) {
+            for (int j = 0; j < opSet.get(j).getOptLength(); j++) {
                 if (j == str.indexOf(str)) {
-                    opSet[j].setOpt(null);
+                    opSet.get(j).setOpt(null);
                 }
             }
         }

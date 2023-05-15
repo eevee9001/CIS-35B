@@ -1,15 +1,15 @@
 package com.matanalbert.assignment3.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OptionSet implements Serializable {
     private String setName;
-    private Option[] opt;
-    // private ArrayList<Option> opt;
+    private List<Option> opt = new ArrayList<>();
 
     OptionSet(String setName, int size) {
         this.setName = setName;
-        opt = new Option[size];
     }
 
     protected String getSetName() {
@@ -21,39 +21,39 @@ public class OptionSet implements Serializable {
     }
 
     protected Option getOneOption(int optionSetIndex) {
-        return opt[optionSetIndex];
+        return opt.get(optionSetIndex);
     }
 
-    protected Option[] getOpt() {
+    protected List<Option> getOpt() {
         return opt;
     }
 
     protected void setOneOption(Option opt, int optionIndex) {
-        this.opt[optionIndex] = opt;
+        this.opt.set(optionIndex, opt);
     }
 
-    protected void setOpt(Option[] opt) {
+    protected void setOpt(List<Option> opt) {
         this.opt = opt;
     }
 
     protected int getOptLength() {
-        return opt.length;
+        return opt.size();
     }
 
     protected String getOptName(int optionIndex) {
-        return opt[optionIndex].getName();
+        return opt.get(optionIndex).getName();
     }
 
     protected void setOptName(int optionIndex, String newOptName) {
-        this.opt[optionIndex].setName(newOptName);
+        this.opt.get(optionIndex).setName(newOptName);
     }
 
     protected float getOptPrice(int optionIndex) {
-        return opt[optionIndex].getPrice();
+        return opt.get(optionIndex).getPrice();
     }
 
     protected void setOptPrice(int optionIndex, float newOptPrice) {
-        this.opt[optionIndex].setPrice(newOptPrice);
+        this.opt.get(optionIndex).setPrice(newOptPrice);
     }
 
     protected void printData() {
@@ -65,7 +65,7 @@ public class OptionSet implements Serializable {
 
     protected void printOneOption(int optionIndex) {
         System.out.printf("Option Set name: %s\n", setName);
-        opt[optionIndex].printData();
+        opt.get(optionIndex).printData();
     }
 
     /**
@@ -75,7 +75,11 @@ public class OptionSet implements Serializable {
      * @param price Option price
      */
     protected void buildOption(int optionIndex, String name, float price) {
-        opt[optionIndex] =new Option(name, price);
+        opt.set(optionIndex, new Option(name, price));
+    }
+
+    protected void addOption(String name, float price) {
+        opt.add(new Option(name, price));
     }
 
 }
