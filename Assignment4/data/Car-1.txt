@@ -1,0 +1,53 @@
+Ford
+Focus Wagon ZTW
+2004
+18445.00
+5
+Color
+10
+Fort Knox Gold Clearcoat Metallic
+0.00
+Liquid Grey Clearcoat Metallic
+0.00
+Infra-Red Clearcoat
+0.00
+Grabber Green Clearcoat Metallic
+0.00
+Sangria Red Clearcoat Metallic
+0.00
+French Blue Clearcoat Metallic
+0.00
+Twilight Blue Clearcoat Metallic
+0.00
+CD Silver Clearcoat Metallic
+0.00
+Pitch Black Clearcoat
+0.00
+Cloud 9 White Clearcoat
+0.00
+Transmission
+2
+automatic
+0.00
+manual
+-815.00
+Brakes/Traction Control
+3
+Standard
+0.00
+ABS
+400.00
+ABS with Advance Trac
+1625.00
+Side Impact Air Bags
+2
+none
+0.00
+present
+350.00
+Power Moonroof
+2
+none
+0.00
+present
+595.00
