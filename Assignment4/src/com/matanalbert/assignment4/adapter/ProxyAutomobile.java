@@ -2,12 +2,13 @@ package com.matanalbert.assignment4.adapter;
 
 import com.matanalbert.assignment4.model.*;
 import com.matanalbert.assignment4.exception.AutoException;
+import com.matanalbert.assignment4.scale.EditOption;
 import com.matanalbert.assignment4.util.FileIO;
 import com.matanalbert.assignment4.util.Logger;
 import com.matanalbert.assignment4.model.Automobile;
 import com.matanalbert.assignment4.model.LHMAuto;
 
-public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceAuto {
+public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceAuto, EditAuto {
     private static LHMAuto<String, Automobile> proxyAutomobiles = new LHMAuto<>();
     private final Logger logger = new Logger("log.txt");
     private final FileIO fileIO = new FileIO(logger);
@@ -112,5 +113,10 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceA
         }
         System.out.println(modelName + " not found");
         return null;
+    }
+
+    @Override
+    public void editThread(String modelName, int operation, String[] args) {
+        new EditOption(modelName, operation, args);
     }
 }
