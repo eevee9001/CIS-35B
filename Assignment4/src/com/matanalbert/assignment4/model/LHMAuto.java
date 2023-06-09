@@ -75,7 +75,6 @@ public class LHMAuto<K, V> implements Map<K, V> {
     }
 
 
-
     public void create(K key, V value) {
         put(key, value);
     }

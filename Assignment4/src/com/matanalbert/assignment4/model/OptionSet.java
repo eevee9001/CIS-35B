@@ -46,7 +46,12 @@ public class OptionSet implements Serializable {
     }
 
     protected void setOptName(int optionIndex, String newOptName) {
-        this.opt.get(optionIndex).setName(newOptName);
+        float price = opt.get(optionIndex).getPrice();
+        // Removing and adding on purpose to demonstrate concurrency corruption
+        opt.remove(optionIndex);
+        opt.add(new Option(newOptName, price));
+//        this.opt.get(optionIndex).setName(newOptName);
+        // above is a safe way of setting Option name
     }
 
     protected float getOptPrice(int optionIndex) {

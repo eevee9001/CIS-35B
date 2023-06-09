@@ -12,7 +12,7 @@ public class Automobile implements Serializable {
     private int year;
     private float basePrice;
     private List<OptionSet> opSet = new ArrayList<>();
-    private Map<String,  Option> choice = new HashMap<>();
+    private Map<String, Option> choice = new HashMap<>();
 
     public Automobile() {
     }
@@ -57,9 +57,9 @@ public class Automobile implements Serializable {
     }
 
 
-
     /**
      * Retrieves a single Option Set
+     *
      * @param optionSetIndex index of Option Set to retrieve
      * @return the chosen Option Set
      */
@@ -69,6 +69,7 @@ public class Automobile implements Serializable {
 
     /**
      * Constructs a single Option Set at a given index
+     *
      * @param setName new name for the option set
      */
     public void addOneOpSet(String setName, int setSize) {
@@ -79,7 +80,9 @@ public class Automobile implements Serializable {
         return opSet;
     }
 
-    public void setOpSet(List<OptionSet> opSet) { this.opSet = opSet; }
+    public void setOpSet(List<OptionSet> opSet) {
+        this.opSet = opSet;
+    }
 
     public int getOpSetLength() {
         return opSet.size();
@@ -115,9 +118,10 @@ public class Automobile implements Serializable {
 
     /**
      * Calls an OptionSet method to construct a single Option at a given index
+     *
      * @param optionSetIndex index of Option Set to set
-     * @param name Option name
-     * @param price Option price
+     * @param name           Option name
+     * @param price          Option price
      */
     public void addOneOpSetOpt(int optionSetIndex, String name, float price) {
         this.opSet.get(optionSetIndex).addOption(name, price);
@@ -167,7 +171,8 @@ public class Automobile implements Serializable {
 
     /**
      * Finds an OptionSet by name and replaces the name
-     * @param str search query
+     *
+     * @param str        search query
      * @param newSetName new set name
      */
     public void updateOpSetName(String str, String newSetName) {
@@ -180,19 +185,29 @@ public class Automobile implements Serializable {
 
     /**
      * Finds an Option by name and replaces the name
-     * @param str search query
-     * @param newOptName new option name
+     *
+     * @param optSetName name of set to search
+     * @param oldValue name of option to find
+     * @param newValue new option name
      */
-    public void updateOptName(String str, String newOptName) {
-        for (int i = 0; i < opSet.size(); i++) {
-            if (i == str.indexOf(str)) {
-                opSet.get(i).setOptName(i, newOptName);
+    public void updateOptName(String optSetName, String oldValue, String newValue) {
+        for (OptionSet set : opSet) {
+            if (set.getSetName().equals(optSetName)) {
+                for (int i = 0; i < set.getOptLength(); i++) {
+                    if (set.getOptName(i).equals(oldValue)) {
+                        set.setOptName(i, newValue);
+                        break;
+                    }
+                }
+                break;
             }
         }
     }
+
     /**
      * Finds an Option's price by name and replaces the price
-     * @param str search query
+     *
+     * @param str         search query
      * @param newOptPrice new option price
      */
     public void updateOptPrice(String str, float newOptPrice) {
@@ -205,6 +220,7 @@ public class Automobile implements Serializable {
 
     /**
      * Deletes an OptionSet
+     *
      * @param optionSetIndex index of option set to delete
      */
     public void deleteOpSet(int optionSetIndex) {
@@ -213,6 +229,7 @@ public class Automobile implements Serializable {
 
     /**
      * Searches for an OptionSet by name and sets it to null
+     *
      * @param str name of Option Set
      */
     public void deleteOpSet(String str) {
@@ -230,6 +247,7 @@ public class Automobile implements Serializable {
 
     /**
      * Deletes an Option and sets it to null
+     *
      * @param optionSetIndex index of option to replace with null
      */
     public void deleteOpt(int optionSetIndex, int optionIndex) {
@@ -238,6 +256,7 @@ public class Automobile implements Serializable {
 
     /**
      * Searches for an Option by name and sets it to null
+     *
      * @param str name of Option
      */
     public void deleteOpt(String str) {

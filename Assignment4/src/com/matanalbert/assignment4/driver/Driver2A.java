@@ -10,12 +10,12 @@ import com.matanalbert.assignment4.adapter.UpdateAuto;
 /**
  * Sample data files are in data directory :
  * Car-1.txt: A complete automobile definition
- * IncompleteCar.txt: An example of an incomplete automobile that generates exceptions
+ * New-Car.txt: An example of an incomplete automobile that generates exceptions
  */
 public class Driver2A {
     public static void main(String[] args) throws IOException {
         if (args.length < 2) {
-            System.out.println("Usage: Driver2A Car-1.txt IncompleteCar.txt");
+            System.out.println("Usage: Driver2A Car-1.txt New-Car.txt");
             System.exit(1);
         }
         CreateAuto create = new BuildAuto();

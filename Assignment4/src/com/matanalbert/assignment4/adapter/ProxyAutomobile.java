@@ -18,8 +18,8 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceA
         do {
             try {
                 Automobile proxyAuto = fileIO.buildAutoObject(fileName);
-                String key = proxyAuto.getMake() + " " + proxyAuto.getModel() + " " + proxyAuto.getYear();
-                proxyAutomobiles.create(key, proxyAuto);
+//                String key = proxyAuto.getMake() + " " + proxyAuto.getModel() + " " + proxyAuto.getYear();
+                proxyAutomobiles.create(proxyAuto.getModel(), proxyAuto);
                 problemFixed = true;
             } catch (AutoException e) {
                 logger.logException(e);
@@ -113,6 +113,10 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceA
         }
         System.out.println(modelName + " not found");
         return null;
+    }
+
+    public static LHMAuto<String, Automobile> getProxyAutomobiles() {
+        return proxyAutomobiles;
     }
 
     @Override

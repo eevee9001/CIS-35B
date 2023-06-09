@@ -2,6 +2,7 @@ package com.matanalbert.assignment4.scale;
 
 import com.matanalbert.assignment4.adapter.*;
 import com.matanalbert.assignment4.model.Automobile;
+import com.matanalbert.assignment4.model.LHMAuto;
 
 public class EditOption extends ProxyAutomobile implements Runnable{
 
@@ -16,32 +17,39 @@ public class EditOption extends ProxyAutomobile implements Runnable{
         this.operation = operation;
         this.args = args;
         this.thread = new Thread(this);
-        this.automobile = null; // use function in LHM to find auto based on model name (methods in helper class)
+        LHMAuto<String, Automobile> lhm = getProxyAutomobiles();
+        this.automobile = lhm.get(modelName); // use function in LHM to find auto based on model name (methods in helper class)
+        thread.start();
+
     }
 
 
     @Override
     public void run() {
-
+        ops();
     }
     public void ops() {
 
-        EditOptionHelper h = new EditOptionHelper(); //add synchronized/non sychronized methods here
+        EditOptionHelper helper = new EditOptionHelper(automobile); //add synchronized/non sychronized methods here
 
         switch(operation) {
             case 0:
+                helper.updateOption0(automobile, args);
                 //Call method in helper class
                 //Update the option name from blue to dark blue - non synchronized operation
                 break;
             case 1:
+                helper.updateOption1(automobile, args);
                 //Call method in helper class
                 //Update the option name from blue to Red	- non synchronized operation
                 break;
             case 2:
+                helper.updateOption2(automobile, args);
                 //Call method in helper class
                 //Update the option name from blue to dark blue - synchronized operation
                 break;
             case 3:
+                helper.updateOption3(automobile, args);
                 //Call method in helper class
                 //Update the option name from blue to red - synchronized operation
                 break;
