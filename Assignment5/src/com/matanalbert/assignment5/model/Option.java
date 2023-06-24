@@ -2,7 +2,7 @@ package com.matanalbert.assignment5.model;
 
 import java.io.Serializable;
 
-class Option implements Serializable {
+public class Option implements Serializable {
     private String optionName;
     private float optionPrice;
 

@@ -76,6 +76,10 @@ public class Automobile implements Serializable {
         this.opSet.add(new OptionSet(setName, setSize));
     }
 
+    public void addOneOpSet(String setName, OptionSet optionSet) {
+        this.opSet.add(optionSet);
+    }
+
     public List<OptionSet> getOpSet() {
         return opSet;
     }

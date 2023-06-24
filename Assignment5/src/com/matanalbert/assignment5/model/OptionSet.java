@@ -13,6 +13,11 @@ public class OptionSet implements Serializable {
         this.setName = setName;
     }
 
+    public OptionSet(String setName, List<Option> options) {
+        this.setName = setName;
+        this.opt = options;
+    }
+
     protected String getSetName() {
         return setName;
     }
