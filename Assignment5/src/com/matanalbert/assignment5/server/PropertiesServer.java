@@ -38,10 +38,14 @@ public class PropertiesServer extends Thread {
             try {
                 Socket clientSocket = null;
                 clientSocket = server.accept();
+                System.out.println("Client connected on port " + clientSocket.getPort() );
                 try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());) {
                     Properties properties = (Properties) in.readObject();
+                    System.out.println("Received properties from client");
                     Automobile automobile = fileIO.buildFromProperties(properties);
+                    System.out.println("Created automobile");
                     buildAuto.addCreatedAutoToLHM(automobile);
+                    System.out.println("Added to database: " + automobile.getModel());
                 }
 
             } catch (IOException | ClassNotFoundException e) {

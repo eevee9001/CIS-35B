@@ -12,12 +12,12 @@ import static com.matanalbert.assignment5.adapter.CreateAuto.FileType.TEXT;
 /**
  * Sample data files are in data directory :
  * Car-1.txt: A complete automobile definition
- * New-Car.properties: An example of an incomplete automobile that generates exceptions
+ * ford-focus.properties: An example of an incomplete automobile that generates exceptions
  */
 public class Driver2A {
     public static void main(String[] args) throws IOException {
         if (args.length < 2) {
-            System.out.println("Usage: Driver2A Car-1.txt New-Car.properties");
+            System.out.println("Usage: Driver2A Car-1.txt ford-focus.properties");
             System.exit(1);
         }
         CreateAuto create = new BuildAuto();
