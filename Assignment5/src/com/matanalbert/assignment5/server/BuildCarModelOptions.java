@@ -4,6 +4,8 @@ import com.matanalbert.assignment5.adapter.BuildAuto;
 import com.matanalbert.assignment5.model.Automobile;
 import com.matanalbert.assignment5.util.FileIO;
 
+import java.util.List;
+
 public class BuildCarModelOptions implements AutoServer {
 
     private final BuildAuto buildAuto;
@@ -17,5 +19,10 @@ public class BuildCarModelOptions implements AutoServer {
     @Override
     public void addCreatedAutoToLHM(Automobile automobile) {
         buildAuto.addCreatedAutoToLHM(automobile);
+    }
+
+    @Override
+    public List<String> getModels() {
+        return buildAuto.getModels();
     }
 }

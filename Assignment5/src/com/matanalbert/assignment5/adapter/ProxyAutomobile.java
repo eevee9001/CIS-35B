@@ -3,14 +3,17 @@ package com.matanalbert.assignment5.adapter;
 import com.matanalbert.assignment5.exception.AutoException;
 import com.matanalbert.assignment5.scale.EditAuto;
 import com.matanalbert.assignment5.scale.EditOption;
+import com.matanalbert.assignment5.server.AutoServer;
 import com.matanalbert.assignment5.util.FileIO;
 import com.matanalbert.assignment5.util.Logger;
 import com.matanalbert.assignment5.model.Automobile;
 import com.matanalbert.assignment5.model.LHMAuto;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceAuto, EditAuto {
+public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceAuto, EditAuto, AutoServer {
     private static LHMAuto<String, Automobile> proxyAutomobiles = new LHMAuto<>();
     private final Logger logger = new Logger("log.txt");
     private final FileIO fileIO = new FileIO(logger);
@@ -118,6 +121,7 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceA
 
     /**
      * Finds an Automobile in a LinkedHashMap
+     *
      * @param modelName the Automobile's model to search for
      * @return the Automobile
      */
@@ -144,5 +148,10 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceA
         String model = automobile.getModel();
         proxyAutomobiles.create(model, automobile);
 
+    }
+
+    @Override
+    public List<String> getModels() {
+        return new ArrayList<>(proxyAutomobiles.keySet());
     }
 }
