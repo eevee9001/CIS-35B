@@ -9,22 +9,38 @@ import com.matanalbert.assignment5.util.Logger;
 import com.matanalbert.assignment5.model.Automobile;
 import com.matanalbert.assignment5.model.LHMAuto;
 
+import java.io.IOException;
+
 public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceAuto, EditAuto {
     private static LHMAuto<String, Automobile> proxyAutomobiles = new LHMAuto<>();
     private final Logger logger = new Logger("log.txt");
     private final FileIO fileIO = new FileIO(logger);
 
-    public void buildAuto(String fileName) {
+    public void buildAuto(String fileName, FileType fileType) {
         boolean problemFixed = false;
         do {
             try {
-                Automobile proxyAuto = fileIO.buildAutoObject(fileName);
-//                String key = proxyAuto.getMake() + " " + proxyAuto.getModel() + " " + proxyAuto.getYear();
+                Automobile proxyAuto;
+
+                switch (fileType) {
+                    case TEXT -> {
+                        proxyAuto = fileIO.buildAutoObject(fileName);
+                    }
+                    case PROPERTIES -> {
+                        proxyAuto = fileIO.readPropertiesFile(fileName);
+                    }
+                    default -> {
+                        // shouldn't happen
+                        throw new IllegalArgumentException("Unknown file type");
+                    }
+                }
                 proxyAutomobiles.create(proxyAuto.getModel(), proxyAuto);
                 problemFixed = true;
             } catch (AutoException e) {
                 logger.logException(e);
                 fileName = e.fix1();
+            } catch (IOException e) {
+                logger.logException(e);
             }
         } while (!problemFixed);
     }

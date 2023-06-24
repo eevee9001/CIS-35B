@@ -6,6 +6,8 @@ import com.matanalbert.assignment5.adapter.BuildAuto;
 import com.matanalbert.assignment5.adapter.CreateAuto;
 import com.matanalbert.assignment5.adapter.UpdateAuto;
 
+import static com.matanalbert.assignment5.adapter.CreateAuto.FileType.TEXT;
+
 
 /**
  * Sample data files are in data directory :
@@ -22,7 +24,7 @@ public class Driver2A {
         UpdateAuto update = new BuildAuto();
 
         // Testing createAuto functionality
-        create.buildAuto(args[0]);
+        create.buildAuto(args[0], TEXT);
         create.printAuto("Focus Wagon ZTW");
         System.out.println("Done");
 
@@ -32,7 +34,7 @@ public class Driver2A {
         create.printAuto("Focus Wagon ZTW");
 
         // Testing AutoException handling with incomplete text file
-        create.buildAuto(args[1]);
+        create.buildAuto(args[1], TEXT);
         create.printAuto("Focus Wagon ZTW");
     }
 }

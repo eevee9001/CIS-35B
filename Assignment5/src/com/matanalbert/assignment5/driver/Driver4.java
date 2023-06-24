@@ -14,12 +14,14 @@ public class Driver4 {
 
         int times = 10000; // large enough number of iterations such that not synced edits may likely crash
 
-        create.buildAuto("New-Car.properties"); // building the automobile
+        create.buildAuto("New-Car.txt",
+                CreateAuto.FileType.TEXT); // building the automobile
         synchronised(edit, times); // two synchronized methods
         waitForUpdate();
         create.printAuto(modelName);
 
-        create.buildAuto("New-Car.properties"); // rebuild the automobile to test not synced edits
+        create.buildAuto("New-Car.txt",
+                CreateAuto.FileType.TEXT); // rebuild the automobile to test not synced edits
         notSynchronized(edit, times); // two not synchronized methods
         waitForUpdate();
         create.printAuto(modelName);

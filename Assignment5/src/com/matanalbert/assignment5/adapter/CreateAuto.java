@@ -4,6 +4,11 @@ import java.io.IOException;
 
 public interface CreateAuto {
 
-    public void buildAuto(String filename) throws IOException;
+    enum FileType {
+        TEXT,
+        PROPERTIES,
+    }
+
+    public void buildAuto(String filename, FileType fileType) throws IOException;
     public void printAuto(String modelName);
 }

@@ -7,13 +7,15 @@ import com.matanalbert.assignment5.adapter.CreateAuto;
 
 import java.io.IOException;
 
+import static com.matanalbert.assignment5.adapter.CreateAuto.FileType.TEXT;
+
 public class Driver3 {
     public static void main(String[] args) throws IOException {
 
         CreateAuto create = new BuildAuto();
         ChoiceAuto choice = new BuildAuto();
 
-        create.buildAuto("Car-1.txt");
+        create.buildAuto("Car-1.txt", TEXT);
         String model1 = "Focus Wagon ZTW";
         create.printAuto(model1);
         choice.setOptionChoice(model1, "Color", "Fort Knox Gold Clearcoat Metallic");
@@ -24,7 +26,7 @@ public class Driver3 {
         System.out.println("Total price: " + choice.getTotalPrice(model1));
         // 18445 + 0 + -815 + 0 + 0 + 0 = 17630
 
-        create.buildAuto("Car-2.txt");
+        create.buildAuto("Car-2.txt", TEXT);
         String model2 = "Mustang";
         create.printAuto(model2);
         choice.setOptionChoice(model2, "Color", "Infra-Red Clearcoat");
