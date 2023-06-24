@@ -9,9 +9,18 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class AutomobileClient {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please upload an automobile properties file:");
+/*
+        while (!scan.hasNextLine()) {
+            scan.nextLine();
+            uploadAuto(scan.nextLine());
+        }
+*/
         for (String arg : args) {
             uploadAuto(arg);
         }
