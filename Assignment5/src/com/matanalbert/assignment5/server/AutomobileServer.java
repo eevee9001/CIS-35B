@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 public class AutomobileServer extends Thread {
     private final BuildAuto buildAuto = new BuildAuto();
@@ -47,6 +48,9 @@ public class AutomobileServer extends Thread {
                         case ADD_AUTO -> {
                             response = handleAddAutoRequest((AddAutoRequest) request);
                         }
+                        case GET_AUTO_LIST -> {
+                            response = handleGetAutoListRequest((GetAutoListRequest) request);
+                        }
                     }
 
                     if (response != null) {
@@ -62,6 +66,13 @@ public class AutomobileServer extends Thread {
             }
 
         }
+    }
+
+    private AutoResponse handleGetAutoListRequest(GetAutoListRequest request) {
+        System.out.println("Received request to get list of models from client");
+        List<String> list = buildAuto.getModels();
+        System.out.println("Sent list of models");
+        return new GetAutoListResponse(list);
     }
 
     private AutoResponse handleAddAutoRequest(AddAutoRequest request) {
