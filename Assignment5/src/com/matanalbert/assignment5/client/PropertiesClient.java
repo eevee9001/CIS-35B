@@ -1,5 +1,7 @@
 package com.matanalbert.assignment5.client;
 
+import com.matanalbert.assignment5.model.AddAutoRequest;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -17,7 +19,7 @@ public class PropertiesClient {
             Properties properties = new Properties();
             properties.load(in);
             System.out.println("Loaded " + propertiesFile);
-            out.writeObject(properties);
+            out.writeObject(new AddAutoRequest(properties));
             System.out.println("Sent properties to server");
         }
     }
