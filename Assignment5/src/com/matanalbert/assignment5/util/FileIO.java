@@ -154,11 +154,16 @@ public class FileIO {
         }
     }
 
-    public Automobile readPropertiesFile(String fileName) throws IOException {
+    public Automobile buildFromPropertiesFile(String fileName) throws IOException {
         Properties properties = new Properties();
-        FileInputStream in = new FileInputStream(fileName);
-        properties.load(in);
-        in.close();
+
+        try (FileInputStream in = new FileInputStream(fileName);) {
+            properties.load(in);
+        }
+        return buildFromProperties(properties);
+    }
+
+    public Automobile buildFromProperties(Properties properties) throws IOException {
 
         String carMake = properties.getProperty("carMake");
         String carModel = properties.getProperty("carModel");
@@ -192,7 +197,7 @@ public class FileIO {
 
     public static void main(String[] args) throws IOException {
         FileIO fileIO = new FileIO(new Logger("log.txt"));
-        Automobile automobile = fileIO.readPropertiesFile("New-Car.properties");
+        Automobile automobile = fileIO.buildFromPropertiesFile("New-Car.properties");
 
         automobile.printData();
     }

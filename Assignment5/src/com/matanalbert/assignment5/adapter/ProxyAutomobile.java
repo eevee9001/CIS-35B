@@ -3,7 +3,6 @@ package com.matanalbert.assignment5.adapter;
 import com.matanalbert.assignment5.exception.AutoException;
 import com.matanalbert.assignment5.scale.EditAuto;
 import com.matanalbert.assignment5.scale.EditOption;
-import com.matanalbert.assignment5.server.AutoServer;
 import com.matanalbert.assignment5.util.FileIO;
 import com.matanalbert.assignment5.util.Logger;
 import com.matanalbert.assignment5.model.Automobile;
@@ -27,7 +26,7 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceA
                         proxyAuto = fileIO.buildAutoObject(fileName);
                     }
                     case PROPERTIES -> {
-                        proxyAuto = fileIO.readPropertiesFile(fileName);
+                        proxyAuto = fileIO.buildFromPropertiesFile(fileName);
                     }
                     default -> {
                         // shouldn't happen
