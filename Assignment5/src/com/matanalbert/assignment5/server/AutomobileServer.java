@@ -32,7 +32,7 @@ public class AutomobileServer extends Thread {
             System.exit(1);
         }
 
-        System.out.println("Properties server started on port: " + port);
+        System.out.println("Automobile server started on port: " + port);
         while (true) {
             try {
                 Socket clientSocket = null;
@@ -51,6 +51,9 @@ public class AutomobileServer extends Thread {
                         case GET_AUTO_LIST -> {
                             response = handleGetAutoListRequest((GetAutoListRequest) request);
                         }
+                        case DOWNLOAD_AUTO -> {
+                            response = handleDownloadAutoRequest((DownloadAutoRequest) request);
+                        }
                     }
 
                     if (response != null) {
@@ -68,13 +71,6 @@ public class AutomobileServer extends Thread {
         }
     }
 
-    private AutoResponse handleGetAutoListRequest(GetAutoListRequest request) {
-        System.out.println("Received request to get list of models from client");
-        List<String> list = buildAuto.getModels();
-        System.out.println("Sent list of models");
-        return new GetAutoListResponse(list);
-    }
-
     private AutoResponse handleAddAutoRequest(AddAutoRequest request) {
         System.out.println("Received properties from client");
         Automobile automobile = null;
@@ -87,6 +83,20 @@ public class AutomobileServer extends Thread {
         buildAuto.addCreatedAutoToLHM(automobile);
         System.out.println("Added to database: " + automobile.getModel());
         return new AddAutoResponse("OK");
+    }
+
+    private AutoResponse handleGetAutoListRequest(GetAutoListRequest request) {
+        System.out.println("Received request to get list of models from client");
+        List<String> list = buildAuto.getModels();
+        System.out.println("Sent list of models");
+        return new GetAutoListResponse(list);
+    }
+
+    private AutoResponse handleDownloadAutoRequest(DownloadAutoRequest request) {
+        System.out.println("Received request to download " + request.getModelName());
+        Automobile automobile = buildAuto.getAutomobile(request.getModelName());
+        System.out.println("Downloaded automobile");
+        return new DownloadAutoResponse(automobile);
     }
 
     public static void main(String[] args) {

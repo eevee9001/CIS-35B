@@ -1,9 +1,6 @@
 package com.matanalbert.assignment5.client;
 
-import com.matanalbert.assignment5.model.AddAutoRequest;
-import com.matanalbert.assignment5.model.AddAutoResponse;
-import com.matanalbert.assignment5.model.GetAutoListRequest;
-import com.matanalbert.assignment5.model.GetAutoListResponse;
+import com.matanalbert.assignment5.model.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,6 +17,8 @@ public class AutomobileClient {
         }
         List<String> models = getModels();
         System.out.println(models);
+        Automobile automobile = downloadAuto("Camry LE");
+        automobile.printData();
     }
 
     private static void uploadAuto(String arg) throws IOException, ClassNotFoundException {
@@ -34,7 +33,6 @@ public class AutomobileClient {
                 System.out.println("Loaded " + propertiesFile);
                 out.writeObject(new AddAutoRequest(properties));
                 System.out.println("Sent properties to server");
-
                 try (ObjectInputStream serverStream = new ObjectInputStream(socket.getInputStream())) {
                     AddAutoResponse response = (AddAutoResponse) serverStream.readObject();
                     System.out.println("Got response: " + response.getStatus());
@@ -49,7 +47,6 @@ public class AutomobileClient {
             try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())) {
                 out.writeObject(new GetAutoListRequest());
                 System.out.println("Sent request to server to get list of models");
-
                 try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
                     GetAutoListResponse response = (GetAutoListResponse) in.readObject();
                     System.out.println("Got response");
@@ -57,6 +54,20 @@ public class AutomobileClient {
                 }
             }
         }
+    }
 
+    private static Automobile downloadAuto(String modelName) throws IOException, ClassNotFoundException {
+        try (Socket socket = new Socket("localhost", 4444)) {
+            System.out.println("Connected to server");
+            try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())) {
+                out.writeObject(new DownloadAutoRequest(modelName));
+                System.out.println("Sent request to configure automobile");
+                try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+                    DownloadAutoResponse response = (DownloadAutoResponse) in.readObject();
+                    System.out.println("Got response");
+                    return response.getAutomobile();
+                }
+            }
+        }
     }
 }

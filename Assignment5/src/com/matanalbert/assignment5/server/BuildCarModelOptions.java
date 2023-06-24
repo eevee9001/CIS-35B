@@ -25,4 +25,9 @@ public class BuildCarModelOptions implements AutoServer {
     public List<String> getModels() {
         return buildAuto.getModels();
     }
+
+    @Override
+    public Automobile getAutomobile(String modelName) {
+        return buildAuto.getAutomobile(modelName);
+    }
 }

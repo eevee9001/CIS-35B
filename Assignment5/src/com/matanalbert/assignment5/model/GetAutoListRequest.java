@@ -9,6 +9,6 @@ public class GetAutoListRequest implements AutoRequest, Serializable {
 
     @Override
     public RequestType getType() {
-        return RequestType.GET_AUTO_LIST;
+        return GET_AUTO_LIST;
     }
 }

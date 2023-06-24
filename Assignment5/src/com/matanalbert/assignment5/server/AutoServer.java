@@ -5,7 +5,9 @@ import com.matanalbert.assignment5.model.Automobile;
 import java.util.List;
 
 public interface AutoServer {
-    public void addCreatedAutoToLHM(Automobile automobile);
+    void addCreatedAutoToLHM(Automobile automobile);
 
-    public List<String> getModels();
+    List<String> getModels();
+
+    Automobile getAutomobile(String modelName);
 }

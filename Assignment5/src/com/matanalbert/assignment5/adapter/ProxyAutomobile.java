@@ -154,4 +154,9 @@ public abstract class ProxyAutomobile implements CreateAuto, UpdateAuto, ChoiceA
     public List<String> getModels() {
         return new ArrayList<>(proxyAutomobiles.keySet());
     }
+
+    @Override
+    public Automobile getAutomobile(String modelName) {
+        return proxyAutomobiles.get(modelName);
+    }
 }
