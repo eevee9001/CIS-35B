@@ -1,14 +1,13 @@
 package com.matanalbert.assignment5.server;
 
 import com.matanalbert.assignment5.adapter.BuildAuto;
-import com.matanalbert.assignment5.model.AddAutoRequest;
-import com.matanalbert.assignment5.model.AutoRequest;
-import com.matanalbert.assignment5.model.Automobile;
+import com.matanalbert.assignment5.model.*;
 import com.matanalbert.assignment5.util.FileIO;
 import com.matanalbert.assignment5.util.Logger;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -42,9 +41,17 @@ public class AutomobileServer extends Thread {
                     AutoRequest request = (AutoRequest) in.readObject();
                     System.out.println("Received request from client");
 
+                    AutoResponse response = null;
+
                     switch (request.getType()) {
                         case ADD_AUTO -> {
-                            handleAddAutoRequest((AddAutoRequest) request);
+                            response = handleAddAutoRequest((AddAutoRequest) request);
+                        }
+                    }
+
+                    if (response != null) {
+                        try (ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
+                            out.writeObject(response);
                         }
                     }
                 }
@@ -57,13 +64,18 @@ public class AutomobileServer extends Thread {
         }
     }
 
-    private void handleAddAutoRequest(AddAutoRequest request) throws IOException {
+    private AutoResponse handleAddAutoRequest(AddAutoRequest request) {
         System.out.println("Received properties from client");
-        Automobile automobile = fileIO.buildFromProperties(request.getProperties());
+        Automobile automobile = null;
+        try {
+            automobile = fileIO.buildFromProperties(request.getProperties());
+        } catch (IOException e) {
+            return new AddAutoResponse("Parse error");
+        }
         System.out.println("Created automobile");
         buildAuto.addCreatedAutoToLHM(automobile);
         System.out.println("Added to database: " + automobile.getModel());
-
+        return new AddAutoResponse("OK");
     }
 
     public static void main(String[] args) {
