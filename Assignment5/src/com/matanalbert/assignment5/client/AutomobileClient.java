@@ -15,6 +15,7 @@ public class AutomobileClient {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please upload an automobile properties file:");
+        // choose any combination of the 4 properties files in data directory
 
 
         while (scan.hasNextLine()) {
