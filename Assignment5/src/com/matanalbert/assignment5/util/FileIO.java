@@ -157,7 +157,7 @@ public class FileIO {
     public Automobile buildFromPropertiesFile(String fileName) throws IOException {
         Properties properties = new Properties();
 
-        try (FileInputStream in = new FileInputStream(fileName);) {
+        try (FileInputStream in = new FileInputStream(fileName)) {
             properties.load(in);
         }
         return buildFromProperties(properties);

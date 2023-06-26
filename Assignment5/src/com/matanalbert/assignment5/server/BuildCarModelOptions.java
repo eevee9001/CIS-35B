@@ -53,7 +53,7 @@ public class BuildCarModelOptions extends Thread implements AutoServer {
                 Socket clientSocket = null;
                 clientSocket = server.accept();
                 System.out.println("Client connected on port " + clientSocket.getPort());
-                try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());) {
+                try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream())) {
                     AutoRequest request = (AutoRequest) in.readObject();
                     System.out.println("Received request from client");
                     System.out.println();

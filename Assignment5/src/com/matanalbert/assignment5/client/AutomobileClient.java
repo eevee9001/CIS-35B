@@ -39,16 +39,15 @@ public class AutomobileClient {
         }
     }
 
-    private static void uploadAuto(String arg) throws IOException, ClassNotFoundException {
+    private static void uploadAuto(String propertiesFileName) throws IOException, ClassNotFoundException {
         try (Socket socket = new Socket("localhost", 4444)) {
-            String propertiesFile = arg;
             System.out.println("Connected to server");
             try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                 FileInputStream propertiesStream = new FileInputStream(propertiesFile)) {
+                 FileInputStream propertiesStream = new FileInputStream(propertiesFileName)) {
 
                 Properties properties = new Properties();
                 properties.load(propertiesStream);
-                System.out.println("Loaded " + propertiesFile);
+                System.out.println("Loaded " + propertiesFileName);
                 out.writeObject(new AddAutoRequest(properties));
                 System.out.println("Sent properties to server");
                 try (ObjectInputStream serverStream = new ObjectInputStream(socket.getInputStream())) {
