@@ -15,19 +15,27 @@ public class AutomobileClient {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please upload an automobile properties file:");
-/*
-        while (!scan.hasNextLine()) {
-            scan.nextLine();
-            uploadAuto(scan.nextLine());
+
+
+        while (scan.hasNextLine()) {
+            String fileName = scan.nextLine();
+            if (fileName.equals("")) {
+                break;
+            }
+            try {
+                uploadAuto(fileName);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
-*/
-        for (String arg : args) {
-            uploadAuto(arg);
-        }
+
         List<String> models = getModels();
         System.out.println(models);
-        Automobile automobile = downloadAuto("Camry LE");
-        automobile.printData();
+        for (String model : models) {
+
+            Automobile automobile = downloadAuto(models.get(getModels().indexOf(model)));
+            automobile.printData();
+        }
     }
 
     private static void uploadAuto(String arg) throws IOException, ClassNotFoundException {
@@ -59,6 +67,7 @@ public class AutomobileClient {
                 try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
                     GetAutoListResponse response = (GetAutoListResponse) in.readObject();
                     System.out.println("Got response");
+                    System.out.println();
                     return response.getModels();
                 }
             }
@@ -74,6 +83,7 @@ public class AutomobileClient {
                 try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
                     DownloadAutoResponse response = (DownloadAutoResponse) in.readObject();
                     System.out.println("Got response");
+                    System.out.println();
                     return response.getAutomobile();
                 }
             }

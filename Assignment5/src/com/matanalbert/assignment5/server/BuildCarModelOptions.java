@@ -56,6 +56,7 @@ public class BuildCarModelOptions extends Thread implements AutoServer {
                 try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());) {
                     AutoRequest request = (AutoRequest) in.readObject();
                     System.out.println("Received request from client");
+                    System.out.println();
 
                     AutoResponse response = null;
 
@@ -97,6 +98,7 @@ public class BuildCarModelOptions extends Thread implements AutoServer {
         System.out.println("Created automobile");
         addCreatedAutoToLHM(automobile);
         System.out.println("Added to database: " + automobile.getModel());
+        System.out.println();
         return new AddAutoResponse("OK");
     }
 
@@ -104,6 +106,7 @@ public class BuildCarModelOptions extends Thread implements AutoServer {
         System.out.println("Received request to get list of models from client");
         List<String> list = getModels();
         System.out.println("Sent list of models");
+        System.out.println();
         return new GetAutoListResponse(list);
     }
 
@@ -111,11 +114,13 @@ public class BuildCarModelOptions extends Thread implements AutoServer {
         System.out.println("Received request to download " + request.getModelName());
         Automobile automobile = getAutomobile(request.getModelName());
         System.out.println("Downloaded automobile");
+        System.out.println();
         return new DownloadAutoResponse(automobile);
     }
 
     public static void main(String[] args) {
         BuildCarModelOptions automobileServer = new BuildCarModelOptions(4444);
         automobileServer.start();
+
     }
 }

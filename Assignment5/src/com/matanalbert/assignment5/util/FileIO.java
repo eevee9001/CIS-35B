@@ -194,11 +194,4 @@ public class FileIO {
         }
         return automobile;
     }
-
-    public static void main(String[] args) throws IOException {
-        FileIO fileIO = new FileIO(new Logger("log.txt"));
-        Automobile automobile = fileIO.buildFromPropertiesFile("ford-focus.properties");
-
-        automobile.printData();
-    }
 }
