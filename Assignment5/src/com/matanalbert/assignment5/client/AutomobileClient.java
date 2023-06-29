@@ -16,6 +16,7 @@ public class AutomobileClient {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please upload an automobile properties file:");
         // choose any combination of the 4 properties files in data directory
+        // Enter (empty line) to continue
 
 
         while (scan.hasNextLine()) {
